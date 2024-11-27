@@ -1,7 +1,6 @@
 <template>
   <div class="Login flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <!-- Updated logo dimensions -->
       <img class="mx-auto h-30 w-28" src="./assets/csu.png" alt="Logo" />
       <h2 class="mt-11 text-center text-2xl/5 font-bold tracking-tight text-gray-900">Log in to your account</h2>
     </div>

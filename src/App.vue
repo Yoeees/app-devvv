@@ -79,7 +79,7 @@ export default defineComponent({
     ]);
 
     const toggleNav = () => {
-      alert('Will be developing soon!'); // Implement functionality if needed.
+      alert('Will be developing soon!'); 
     };
 
     return { logs, toggleNav };
@@ -88,10 +88,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* General Styles */
+
+
 body {
   margin: 0;
-  color: #333;
+  color: #838383;
 }
 
 .log-history {
@@ -136,8 +137,8 @@ body {
 .indicator {
   display: flex;
   flex-direction: row; /* side by side */
-  width: 20px; /* width */
-  height: 50px; /* height */
+  width: 20px; 
+  height: 50px; 
   margin-right: 0.5rem;
 }
 
@@ -145,30 +146,30 @@ body {
 .type-indicator,
 .status-indicator {
   flex: 1;
-  height: 100%; /* Full height */
+  height: 100%; 
 }
-/*Occupant */
+/* OCCUPANT */
 .type-indicator {
   background-color: #3fa1f7; 
 }
-/* Default OUT */
+/* OUT */
 .status-indicator {
   background-color: #f44336; 
 }
 
-/* Color Classes */
+/* OCCUPANT */
 .occupant {
   background-color: #3fa1f7;
 }
-
+/* VISITOR */
 .visitor {
   background-color: #f8cc55;
 }
-
+/* IN */
 .in {
   background-color: #4caf50;
 }
-
+/* OUT */
 .out {
   background-color: #f44336;
 }

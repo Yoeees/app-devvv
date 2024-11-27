@@ -109,14 +109,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  color: #838383;
-}
 
 .log-history {
   max-width: 100%;
-  margin: 5px;
 }
 
 /* Navbar */
@@ -140,13 +135,14 @@ body {
 
 /* Logs Section */
 .logs {
-  margin: 1rem 0;
+  margin: 0.5rem 0.5rem;
 }
 
-.log a {
+a {
   display: flex;
   justify-content: flex-end;
 }
+
 .log {
   display: flex;
   align-items: center;
@@ -159,7 +155,7 @@ body {
 
 .indicator {
   display: flex;
-  flex-direction: row; /* side by side */
+  flex-direction: row; /* side by side color scheme indicator inside the rectangle*/
   width: 20px;
   height: 50px;
   margin-right: 0.5rem;

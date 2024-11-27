@@ -1,67 +1,251 @@
 <template>
-  <div class="Login flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-30 w-28" src="./assets/csu.png" alt="Logo" />
-      <h2 class="mt-11 text-center text-2xl/5 font-bold tracking-tight text-gray-900">Log in to your account</h2>
-    </div>
+  <div class="log-history">
+    <!-- Top Navbar -->
+    <header class="navbar">
+      <div class="welcome-message">
+        <h1>Welcome Admin,</h1>
+        <p>Gent's Dorm Log History</p>
+      </div>
+      <button @click="toggleNav" class="nav-toggle">
+        <span class="menu-icon">☰</span>
+      </button>
+    </header>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
-        <!-- Email Input -->
-        <div>
-          <div class="mt-2">
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="Email"
-              class="block w-full rounded-md border-0 py-2.5 pl-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm/6"
-            />
+    <!-- Legend -->
+    <section class="legend">
+      <div class="legend-item">
+        <div class="color-box occupant"></div>
+        <span>Occupant</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box visitor"></div>
+        <span>Visitor</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box in"></div>
+        <span>IN</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box out"></div>
+        <span>OUT</span>
+      </div>
+    </section>
+
+    <!-- Log History Section -->
+    <main>
+      <section class="logs">
+        <a href="#"><u>View All</u></a>
+        <div class="log" v-for="log in logs" :key="log.id">
+          <!-- Side-by-Side Indicators -->
+          <div class="indicator">
+            <div class="type-indicator" :class="[log.type === 'Occupant' ? 'occupant' : 'visitor']"></div>
+            <div class="status-indicator" :class="[log.status === 'IN' ? 'in' : 'out']"></div>
+          </div>
+          <!-- Log Details -->
+          <div class="details">
+            <div class="name-timestamp">
+              <h2>{{ log.name }}</h2>
+              <p class="timestamp">{{ log.timestamp }}</p>
+            </div>
+            <p class="activity" v-if="log.activity">{{ log.activity }}</p>
           </div>
         </div>
-
-        <!-- Password Input -->
-        <div>
-          <div class="mt-2">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="Password"
-              class="block w-full rounded-md border-0 py-2 pl-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm/6"
-            />
-          </div>
-        </div>
-
-        <!-- Sign In Button -->
-        <div>
-          <button
-            type="submit"
-            class="flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm/6 font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-          >
-            Sign in
-          </button>
-        </div>
-
-        <!-- Forgot Password -->
-        <div class="text-sm">
-          <a
-            href="#"
-            class="flex w-full justify-center font-semibold text-yellow-600 hover:text-yellow-500"
-          >
-            Forgot password?
-          </a>
-        </div>
-      </form>
-    </div>
+      </section>
+    </main>
   </div>
 </template>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  name: 'LogHistory',
+  setup() {
+    const logs = ref([
+      {
+        id: 1,
+        name: 'Henry Ford',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Occupant',
+        status: 'OUT',
+        activity: 'Downtown',
+      },
+      {
+        id: 2,
+        name: 'John Doe',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Visitor',
+        status: 'IN',
+        activity: 'Visiting Relative',
+      },
+
+      {
+        id: 3,
+        name: 'David James',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Occupant',
+        status: 'OUT',
+        activity: 'Going Home',
+      },
+
+      {
+        id: 3,
+        name: 'David James',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Occupant',
+        status: 'IN',
+        activity: '',
+      },
+
+    ]);
+
+    const toggleNav = () => {
+      alert('Will be developing soon!');
+    };
+
+    return { logs, toggleNav };
+  },
+});
+</script>
+
 <style scoped>
-  .Login {
-    background: linear-gradient(to bottom, #3DB144, #1A4B1D);
-    height: 100vh;
-  }
+
+.log-history {
+  max-width: 100%;
+}
+
+/* Navbar */
+.navbar {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: linear-gradient(to right, #4caf50, #0b6623);
+  color: white;
+  padding: 1rem;
+}
+
+.nav-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Logs Section */
+.logs {
+  margin: 0.5rem 0.5rem;
+}
+
+a {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.log {
+  display: flex;
+  align-items: center;
+  border: 1px solid #8f760a;
+  margin: 0.5rem 0;
+  padding: 0;
+  border-radius: 5px;
+  background: #dddddd;
+}
+
+.indicator {
+  display: flex;
+  flex-direction: row; /* side by side color scheme indicator inside the rectangle*/
+  width: 20px;
+  height: 50px;
+  margin-right: 0.5rem;
+}
+
+/* Full height */
+.type-indicator,
+.status-indicator {
+  flex: 1;
+  height: 100%;
+}
+
+/* OCCUPANT */
+.type-indicator {
+  background-color: #3fa1f7;
+}
+
+/* OUT */
+.status-indicator {
+  background-color: #f44336;
+}
+
+/* OCCUPANT */
+.occupant {
+  background-color: #3fa1f7;
+}
+
+/* VISITOR */
+.visitor {
+  background-color: #f8cc55;
+}
+
+/* IN */
+.in {
+  background-color: #4caf50;
+}
+
+/* OUT */
+.out {
+  background-color: #f44336;
+}
+
+/* Log Details */
+.details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.name-timestamp {
+  display: flex;
+  margin-right: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.activity {
+  display: flex;
+  margin-right: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  justify-content: flex-end;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+} 
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.color-box {
+  width: 15px;
+  height: 15px;
+  margin-right: 0.5rem;
+  border-radius: 2px;
+}
 </style>

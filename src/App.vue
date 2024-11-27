@@ -9,12 +9,32 @@
       <button @click="toggleNav" class="nav-toggle">
         <span class="menu-icon">☰</span>
       </button>
-      <a href="#"><u>View All</u></a>
     </header>
+
+    <!-- Legend -->
+    <section class="legend">
+      <div class="legend-item">
+        <div class="color-box occupant"></div>
+        <span>Occupant</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box visitor"></div>
+        <span>Visitor</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box in"></div>
+        <span>IN</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box out"></div>
+        <span>OUT</span>
+      </div>
+    </section>
 
     <!-- Log History Section -->
     <main>
       <section class="logs">
+        <a href="#"><u>View All</u></a>
         <div class="log" v-for="log in logs" :key="log.id">
           <!-- Side-by-Side Indicators -->
           <div class="indicator">
@@ -32,26 +52,6 @@
         </div>
       </section>
     </main>
-
-    <!-- Legend -->
-    <footer class="legend">
-      <div class="legend-item">
-        <div class="color-box occupant"></div>
-        <span>Occupant</span>
-      </div>
-      <div class="legend-item">
-        <div class="color-box visitor"></div>
-        <span>Visitor</span>
-      </div>
-      <div class="legend-item">
-        <div class="color-box in"></div>
-        <span>IN</span>
-      </div>
-      <div class="legend-item">
-        <div class="color-box out"></div>
-        <span>OUT</span>
-      </div>
-    </footer>
   </div>
 </template>
 
@@ -62,24 +62,45 @@ export default defineComponent({
   name: 'LogHistory',
   setup() {
     const logs = ref([
-      { id: 1, name: 'Henry Ford', 
-      timestamp: '2024-09-08 08:00 AM', 
-      type: 'Occupant', 
-      status: 'OUT', 
-      activity: 'Downtown' 
+      {
+        id: 1,
+        name: 'Henry Ford',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Occupant',
+        status: 'OUT',
+        activity: 'Downtown',
       },
-      
-      { id: 1, name: 'John Doe', 
-      timestamp: '2024-09-08 08:00 AM', 
-      type: 'Visitor', 
-      status: 'IN', 
-      activity: 'Visiting Relative' 
+      {
+        id: 2,
+        name: 'John Doe',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Visitor',
+        status: 'IN',
+        activity: 'Visiting Relative',
+      },
+
+      {
+        id: 3,
+        name: 'David James',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Occupant',
+        status: 'OUT',
+        activity: 'Going Home',
+      },
+
+      {
+        id: 3,
+        name: 'David James',
+        timestamp: '2024-09-08 08:00 AM',
+        type: 'Occupant',
+        status: 'IN',
+        activity: '',
       },
 
     ]);
 
     const toggleNav = () => {
-      alert('Will be developing soon!'); 
+      alert('Will be developing soon!');
     };
 
     return { logs, toggleNav };
@@ -88,8 +109,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
-
 body {
   margin: 0;
   color: #838383;
@@ -124,6 +143,10 @@ body {
   margin: 1rem 0;
 }
 
+.log a {
+  display: flex;
+  justify-content: flex-end;
+}
 .log {
   display: flex;
   align-items: center;
@@ -137,8 +160,8 @@ body {
 .indicator {
   display: flex;
   flex-direction: row; /* side by side */
-  width: 20px; 
-  height: 50px; 
+  width: 20px;
+  height: 50px;
   margin-right: 0.5rem;
 }
 
@@ -146,29 +169,34 @@ body {
 .type-indicator,
 .status-indicator {
   flex: 1;
-  height: 100%; 
+  height: 100%;
 }
+
 /* OCCUPANT */
 .type-indicator {
-  background-color: #3fa1f7; 
+  background-color: #3fa1f7;
 }
+
 /* OUT */
 .status-indicator {
-  background-color: #f44336; 
+  background-color: #f44336;
 }
 
 /* OCCUPANT */
 .occupant {
   background-color: #3fa1f7;
 }
+
 /* VISITOR */
 .visitor {
   background-color: #f8cc55;
 }
+
 /* IN */
 .in {
   background-color: #4caf50;
 }
+
 /* OUT */
 .out {
   background-color: #f44336;
@@ -211,7 +239,7 @@ h2 {
   display: flex;
   justify-content: space-around;
   margin: 1rem 0;
-}
+} 
 
 .legend-item {
   display: flex;

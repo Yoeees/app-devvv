@@ -33,11 +33,11 @@
 
     <!-- Log History Section -->
     <main>
-      <section class="logs">
+     <section class="logs">
         <a href="#"><u>View All</u></a>
         <div class="log" v-for="log in logs" :key="log.id">
           <!-- Side-by-Side Indicators -->
-          <div class="indicator">
+          <div class="indicator"> 
             <div class="type-indicator" :class="[log.type === 'Occupant' ? 'occupant' : 'visitor']"></div>
             <div class="status-indicator" :class="[log.status === 'IN' ? 'in' : 'out']"></div>
           </div>

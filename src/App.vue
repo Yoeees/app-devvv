@@ -1,112 +1,253 @@
+<script setup lang=ts>
+import { defineComponent } from 'vue';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/avatar'
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb' 
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Separator } from '@/components/ui/separator'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarTrigger,
+} from '@/components/ui/sidebar'
+import {
+  AudioWaveform,
+  BadgeCheck,
+  ChevronRight,
+  ChevronsUpDown,
+  Command,
+  GalleryVerticalEnd,
+  LogOut,
+  Plus,
+  PanelLeftDashed, ScrollText, Users, Bed
+} from 'lucide-vue-next'
+import { ref } from 'vue'
+
+// This is sample data.
+const dorm = {
+  static_dorm_name: {
+    name: 'Gents Dormitory',
+    logo: './csu.png', // Path to the dorm logo
+  },
+}
+const data = {
+  user: {
+    name: 'Admin',
+    email: 'Gents_Admin@gmail.com',
+    avatar: './profile.jpg',
+  },
+}
+// Content of of the SideBar
+const Items = [{
+    title: "Dashboard",
+        url: "#",
+        icon: PanelLeftDashed, // Replace `null` with actual icon component if available
+    },
+    {
+        title: "Log History",
+        url: "#",
+        icon: ScrollText , // Replace with an icon component
+    },
+    {
+        title: "Occupant",
+        url: "#",
+        icon: Bed, // Replace with an icon component
+    },
+    {
+        title: "Visitor",
+        url: "#",
+        icon: Users, // Replace with an icon component
+
+  }
+]
+
+</script>
+
 <template>
-  <div class="log-history">
-    <!-- Top Navbar -->
-    <header class="navbar">
-      <div class="welcome-message">
-        <h1>Welcome Admin,</h1>
-        <p>Gent's Dorm Log History</p>
-      </div>
-      <button @click="toggleNav" class="nav-toggle">
-        <span class="menu-icon">☰</span>
-      </button>
-    </header>
-
-    <!-- Legend -->
-    <section class="legend">
-      <div class="legend-item">
-        <div class="color-box occupant"></div>
-        <span>Occupant</span>
-      </div>
-      <div class="legend-item">
-        <div class="color-box visitor"></div>
-        <span>Visitor</span>
-      </div>
-      <div class="legend-item">
-        <div class="color-box in"></div>
-        <span>IN</span>
-      </div>
-      <div class="legend-item">
-        <div class="color-box out"></div>
-        <span>OUT</span>
-      </div>
-    </section>
-
-    <!-- Log History Section -->
-    <main>
-      <section class="logs">
-        <a href="#"><u>View All</u></a>
-        <div class="log" v-for="log in logs" :key="log.id">
-          <!-- Side-by-Side Indicators -->
-          <div class="indicator">
-            <div class="type-indicator" :class="[log.type === 'Occupant' ? 'occupant' : 'visitor']"></div>
-            <div class="status-indicator" :class="[log.status === 'IN' ? 'in' : 'out']"></div>
+  <SidebarProvider>
+    <Sidebar class="custom-sidebar" collapsible="icon">
+      <SidebarHeader class="">
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          size="lg"
+          class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+        >
+          <!-- Static Logo -->
+          <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+            <img :src="dorm.static_dorm_name.logo" alt="Dorm Logo" class="size-4" />
           </div>
-          <!-- Log Details -->
-          <div class="details">
-            <div class="name-timestamp">
-              <h2>{{ log.name }}</h2>
-              <p class="timestamp">{{ log.timestamp }}</p>
-            </div>
-            <p class="activity" v-if="log.activity">{{ log.activity }}</p>
+
+          <!-- Static Dorm Name -->
+          <div class="grid flex-1 text-left text-sm leading-tight">
+            <span class="truncate font-semibold">{{ dorm.static_dorm_name.name }}</span>
           </div>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+    <DropdownMenuSeparator class="bg-orange-900" />
+  </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+            <SidebarGroupLabel>Menu-Items</SidebarGroupLabel>
+            <SidebarGroupContent>
+            <SidebarMenu>
+                <SidebarMenuItem
+                v-for="item in Items"
+                :key="item.title"
+                >
+                <SidebarMenuButton asChild>
+                    <a :href="item.url">
+                    <span v-if="item.icon">
+                        <component class="w-5" :is="item.icon " />
+                    </span>
+                    <span>{{ item.title }}</span>
+                    </a>
+                </SidebarMenuButton>
+                </SidebarMenuItem>
+            </SidebarMenu>
+            </SidebarGroupContent>
+        </SidebarGroup>
+        </SidebarContent>
+      <SidebarRail />
+      <!--For Log-out -->
+      <!-- Avatar fot users-->
+      <SidebarFooter>
+        <DropdownMenuSeparator class="bg-orange-900" />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <!-- Avatar fot users-->
+              <DropdownMenuTrigger as-child>
+                <SidebarMenuButton
+                  size="lg"
+                  class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                >
+                  <Avatar class="h-8 w-8 rounded-lg">
+                    <AvatarImage :src="data.user.avatar" :alt="data.user.name" />
+                    <AvatarFallback class="rounded-lg">
+                      GND
+                    </AvatarFallback>
+                  </Avatar>
+                  <div class="grid flex-1 text-left text-sm leading-tight">
+                    <span class="truncate font-semibold">{{ data.user.name }}</span>
+                    <span class="truncate text-xs">{{ data.user.email }}</span>
+                  </div>
+                  <ChevronsUpDown class="ml-auto size-4" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg" side="bottom" align="end" :side-offset="4">
+                <DropdownMenuLabel class="p-0 font-normal">
+                  <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                    <Avatar class="h-8 w-8 rounded-lg">
+                      <AvatarImage :src="data.user.avatar" :alt="data.user.name" />
+                      <AvatarFallback class="rounded-lg">
+                        GND
+                      </AvatarFallback>
+                    </Avatar>
+                    <div class="grid flex-1 text-left text-sm leading-tight">
+                      <span class="truncate font-semibold">{{ data.user.name }}</span>
+                      <span class="truncate text-xs">{{ data.user.email }}</span>
+                    </div>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator class="bg-orange-900"/>
+                <DropdownMenuItem>
+                  <LogOut />
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+              <!--For  Users Avatar-->
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+      <!--For  Users Avatar-->
+    </Sidebar>
+    <SidebarInset>
+      <header class=" bg-green-800 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <div class="flex items-center gap-2 px-4">
+          <SidebarTrigger class="-ml-1" />
+          <Separator orientation="vertical" class="mr-2 h-4" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem class="hidden md:block">
+                <BreadcrumbLink href="#">
+                  Dashboard
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
         </div>
-      </section>
-    </main>
-  </div>
+      </header >
+
+        
+      <main>
+          <header class="2">
+            <section class="legend">
+              <div class="legend-item">
+                <div class="color-box occupant"></div>
+                <span>Occupant</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box visitor"></div>
+                <span>Visitor</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box in"></div>
+                <span>IN</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box out"></div>
+                <span>OUT</span>
+              </div>
+            </section>
+        </header>
+      </main>
+    </SidebarInset>
+  </SidebarProvider>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  name: 'LogHistory',
-  setup() {
-    const logs = ref([
-      {
-        id: 1,
-        name: 'Henry Ford',
-        timestamp: '2024-09-08 08:00 AM',
-        type: 'Occupant',
-        status: 'OUT',
-        activity: 'Downtown',
-      },
-      {
-        id: 2,
-        name: 'John Doe',
-        timestamp: '2024-09-08 08:00 AM',
-        type: 'Visitor',
-        status: 'IN',
-        activity: 'Visiting Relative',
-      },
-
-      {
-        id: 3,
-        name: 'David James',
-        timestamp: '2024-09-08 08:00 AM',
-        type: 'Occupant',
-        status: 'OUT',
-        activity: 'Going Home',
-      },
-
-      {
-        id: 3,
-        name: 'David James',
-        timestamp: '2024-09-08 08:00 AM',
-        type: 'Occupant',
-        status: 'IN',
-        activity: '',
-      },
-
-    ]);
-
-    const toggleNav = () => {
-      alert('Will be developing soon!');
-    };
-
-    return { logs, toggleNav };
-  },
-});
-</script>
 
 <style scoped>
 

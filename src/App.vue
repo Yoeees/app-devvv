@@ -161,7 +161,7 @@ const Items = [{
               <DropdownMenuTrigger as-child>
                 <SidebarMenuButton
                   size="lg"
-                  class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                  class=" data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                   <Avatar class="h-8 w-8 rounded-lg">
                     <AvatarImage :src="data.user.avatar" :alt="data.user.name" />
@@ -251,49 +251,6 @@ const Items = [{
 
 <style scoped>
 
-.log-history {
-  max-width: 100%;
-}
-
-/* Navbar */
-.navbar {
-  height: 150px;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  background: linear-gradient(to right, #4caf50, #0b6623);
-  color: white;
-  padding: 1rem;
-}
-
-.nav-toggle {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* Logs Section */
-.logs {
-  margin: 0.5rem 0.5rem;
-}
-
-a {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.log {
-  display: flex;
-  align-items: center;
-  border: 1px solid #8f760a;
-  margin: 0.5rem 0;
-  padding: 0;
-  border-radius: 5px;
-  background: #dddddd;
-}
-
 .indicator {
   display: flex;
   flex-direction: row; /* side by side color scheme indicator inside the rectangle*/
@@ -339,37 +296,6 @@ a {
   background-color: #f44336;
 }
 
-/* Log Details */
-.details {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.name-timestamp {
-  display: flex;
-  margin-right: 0.5rem;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h2 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.timestamp {
-  font-size: 0.8rem;
-  color: gray;
-}
-
-.activity {
-  display: flex;
-  margin-right: 1rem;
-  font-size: 0.9rem;
-  color: #555;
-  justify-content: flex-end;
-}
 
 /* Legend */
 .legend {
